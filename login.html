@@ -1,0 +1,207 @@
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Happy Birthday</title>
+    <link rel="Shortcut Icon" href="https://i.pinimg.com/236x/a5/20/de/a520deb545fea9b62776e6bea5d77928.jpg"
+        type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
+    <style>
+        html {
+            height: 100%;
+        }
+
+        body {
+            font-family: "Patrick Hand", "Helvetica Neue", "Luxi Sans", "DejaVu Sans", Tahoma, "Hiragino Sans GB", "Microsoft Yahei", sans-serif;
+            background: linear-gradient(to bottom, #FFB6C1 0%, #FF69B4 120%);
+            color: #FF4081;
+            font-size: 20px;
+            line-height: 2;
+            letter-spacing: 1.5px;
+            margin: 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .login-container {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 700px;
+            height: 500px;
+            background: rgba(255, 245, 247, 0.9);
+            border-radius: 20px;
+            box-shadow: 0 0 20px rgba(255, 105, 180, 0.5);
+            border: 2px solid #FFB6C1;
+            display: flex;
+            z-index: 1000;
+            animation: sparkle 2s infinite;
+        }
+
+        @keyframes sparkle {
+            0% {
+                box-shadow: 0 0 10px rgba(255, 105, 180, 0.5);
+            }
+
+            50% {
+                box-shadow: 0 0 20px rgba(255, 182, 193, 0.8);
+            }
+
+            100% {
+                box-shadow: 0 0 10px rgba(255, 105, 180, 0.5);
+            }
+        }
+
+        .login-image {
+            flex: 1;
+            background: url('https://dongnv.blob.core.windows.net/bestnetify/1756134591374-img-embe1.jpg') no-repeat center center;
+            background-size: cover;
+            border-radius: 20px 0 0 20px;
+        }
+
+        .login-form-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .login-form {
+            text-align: center;
+        }
+
+        .login-form h2 {
+            color: #FF4081;
+            font-size: 24px;
+            margin-bottom: 15px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        .login-form input {
+            display: block;
+            margin: 10px auto;
+            padding: 10px;
+            width: 200px;
+            border: 2px solid #FFCCDD;
+            border-radius: 10px;
+            font-size: 16px;
+            font-family: "Patrick Hand", sans-serif;
+            background: #FFF0F5;
+            color: #333;
+            transition: border-color 0.3s ease;
+        }
+
+        .login-form input:disabled {
+            background: #FFE4E1;
+            color: #FF4081;
+            cursor: not-allowed;
+        }
+
+        .login-form input:focus {
+            outline: none;
+            border-color: #FF69B4;
+            box-shadow: 0 0 10px rgba(255, 105, 180, 0.5);
+        }
+
+        .keypad {
+            display: grid;
+            grid-template-columns: repeat(3, 50px);
+            gap: 8px;
+            margin: 10px auto;
+            justify-content: center;
+        }
+
+        .keypad button {
+            padding: 8px;
+            border: none;
+            border-radius: 8px;
+            background: #FF69B4;
+            color: #FFF;
+            font-size: 16px;
+            font-family: "Patrick Hand", sans-serif;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+        .keypad button:hover {
+            background: #FF1493;
+            transform: scale(1.05);
+        }
+
+        .login-form button {
+            padding: 10px 25px;
+            border: none;
+            border-radius: 10px;
+            background: #FF69B4;
+            color: #FFF;
+            font-size: 16px;
+            font-family: "Patrick Hand", sans-serif;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+        .login-form button:hover {
+            background: #FF1493;
+            transform: scale(1.05);
+        }
+
+        .error-message {
+            color: #FF1744;
+            font-size: 14px;
+            margin-top: 8px;
+            font-family: "Patrick Hand", sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login-container">
+        <div class="login-image"></div>
+        <div class="login-form-container">
+            <div class="login-form">
+                <h2>🎉 Happy Birthday 🎂</h2>
+                <input type="text" id="username" value="Chúc mừng sinh nhật em bé" disabled>
+                <input type="text" id="password" placeholder="Bé đoán mật khẩu là gì" readonly>
+                <div class="keypad">
+                    <button onclick="appendNumber('1')">1</button>
+                    <button onclick="appendNumber('2')">2</button>
+                    <button onclick="appendNumber('3')">3</button>
+                    <button onclick="appendNumber('4')">4</button>
+                    <button onclick="appendNumber('5')">5</button>
+                    <button onclick="appendNumber('6')">6</button>
+                    <button onclick="appendNumber('7')">7</button>
+                    <button onclick="appendNumber('8')">8</button>
+                    <button onclick="appendNumber('9')">9</button>
+                    <button onclick="appendNumber('0')">0</button>
+                </div>
+                <button onclick="handleLogin()">Chắc chưa 🎈</button>
+                <p id="error-message" class="error-message"></p>
+            </div>
+        </div>
+    </div>
+    <script>
+        function appendNumber(number) {
+            const passwordInput = document.getElementById('password');
+            passwordInput.value += number;
+        }
+
+        function handleLogin() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const errorMessage = document.getElementById('error-message');
+
+            if (username === "Chúc mừng sinh nhật em bé" && password === "25082003") {
+                window.location.href = 'index.html';
+            } else {
+                errorMessage.textContent = "Sai rùi! Bé thử lại đi 🎈";
+                document.getElementById('password').value = '';
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,123 @@
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Happy Birthday Celebration</title>
+    <link rel="Shortcut Icon" href="https://i.pinimg.com/236x/a5/20/de/a520deb545fea9b62776e6bea5d77928.jpg"
+        type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
+    <style>
+        html {
+            height: 100%;
+        }
+
+        body {
+            font-family: "Patrick Hand", "Helvetica Neue", "Luxi Sans", "DejaVu Sans", Tahoma, "Hiragino Sans GB", "Microsoft Yahei", sans-serif;
+            background: linear-gradient(to bottom, #FFB6C1 0%, #FF69B4 120%);
+            color: #FF4081;
+            font-size: 20px;
+            line-height: 2;
+            letter-spacing: 1.5px;
+            margin: 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .canvas {
+            margin: 0 auto;
+            display: block;
+        }
+
+        .text {
+            position: fixed;
+            bottom: 100px;
+            text-align: center;
+            width: 100%;
+            font-weight: bold;
+            color: #FF4081;
+            font-size: 24px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+
+<body>
+    <canvas class="canvas" width="1820" height="905"></canvas>
+    <div class="text">🎉 Happy Birthday Celebration! 🎂</div>
+    <div>
+        <audio autoplay loop>
+            <source src="https://dongnv.blob.core.windows.net/bestnetify/1756134588491-happy-birthday-357371.mp3"
+                type="audio/mpeg">
+        </audio>
+    </div>
+    <script>
+        const canvas = document.querySelector('.canvas');
+        const ctx = canvas.getContext('2d');
+
+        function adjustCanvas() {
+            canvas.width = window.innerWidth - 100;
+            canvas.height = window.innerHeight - 30;
+        }
+        adjustCanvas();
+        window.addEventListener('resize', adjustCanvas);
+
+        const images = [
+            'embe1.jpg',
+            'embe2.jpg',
+            'https://img.freepik.com/free-vector/celebration-background-with-balloons-confetti_1308-75011.jpg',
+            'https://img.freepik.com/free-vector/happy-birthday-background-with-cake-gift_1308-75012.jpg',
+            'https://img.freepik.com/free-vector/festive-birthday-background-with-balloons_1308-75013.jpg',
+            'https://img.freepik.com/free-vector/happy-birthday-card-with-balloons-cake_1308-75014.jpg',
+            'https://img.freepik.com/free-vector/party-background-with-balloons-confetti_1308-75015.jpg',
+            'https://img.freepik.com/free-vector/happy-birthday-background-with-gifts-cake_1308-75016.jpg',
+            'https://img.freepik.com/free-vector/celebration-background-with-balloons_1308-75017.jpg',
+            'https://img.freepik.com/free-vector/happy-birthday-card-with-confetti_1308-75018.jpg'
+        ];
+
+        const imageObjects = [];
+        images.forEach(src => {
+            const img = new Image();
+            img.src = src;
+            imageObjects.push({
+                img: img,
+                x: -100,
+                y: Math.random() * (canvas.height - 100),
+                speed: Math.random() * 5 + 2,
+                rotation: (Math.random() - 0.5) * 0.2
+            });
+        });
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            imageObjects.forEach(obj => {
+                if (obj.img.complete) {
+                    ctx.save();
+                    ctx.translate(obj.x + 50, obj.y + 50);
+                    ctx.rotate(obj.rotation);
+                    ctx.drawImage(obj.img, -50, -50, 100, 100);
+                    ctx.restore();
+                    obj.x += obj.speed;
+                    if (obj.x > canvas.width + 100) {
+                        obj.x = -100;
+                        obj.y = Math.random() * (canvas.height - 100);
+                        obj.speed = Math.random() * 5 + 2;
+                        obj.rotation = (Math.random() - 0.5) * 0.2;
+                    }
+                }
+            });
+            requestAnimationFrame(animate);
+        }
+
+        // Start animation after all images are loaded
+        Promise.all(imageObjects.map(obj => new Promise(resolve => {
+            if (obj.img.complete) resolve();
+            else obj.img.onload = resolve;
+        }))).then(() => {
+            animate();
+        });
+    </script>
+</body>
+
+</html>

@@ -7,31 +7,31 @@
         type="image/x-icon" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
     <style>
         html {
             height: 100%;
         }
 
         body {
-            font-family: "Helvetica Neue", "Luxi Sans", "DejaVu Sans", Tahoma, "Hiragino Sans GB", "Microsoft Yahei", sans-serif;
-            background: #79a8ae;
-            color: #CFEBE4;
-            font-size: 18px;
+            font-family: "Patrick Hand", "Helvetica Neue", "Luxi Sans", "DejaVu Sans", Tahoma, "Hiragino Sans GB", "Microsoft Yahei", sans-serif;
+            background: linear-gradient(to bottom, #FFB6C1 0%, #FF69B4 120%);
+            color: #FF4081;
+            font-size: 20px;
             line-height: 2;
-            letter-spacing: 1.2px;
+            letter-spacing: 1.5px;
             margin: 0;
+            position: relative;
+            overflow: hidden;
         }
 
         a {
-            color: #ebf7f4;
+            color: #FFAAC1;
+            text-decoration: none;
         }
 
         .body--ready {
-            background: -webkit-linear-gradient(top, rgb(203, 235, 219) 0%, rgb(55, 148, 192) 120%);
-            background: -moz-linear-gradient(top, rgb(203, 235, 219) 0%, rgb(55, 148, 192) 120%);
-            background: -o-linear-gradient(top, rgb(203, 235, 219) 0%, rgb(55, 148, 192) 120%);
-            background: -ms-linear-gradient(top, rgb(203, 235, 219) 0%, rgb(55, 148, 192) 120%);
-            background: linear-gradient(top, rgb(203, 235, 219) 0%, rgb(55, 148, 192) 120%);
+            background: linear-gradient(to bottom, #FFB6C1 0%, #FF69B4 120%);
         }
 
         .text {
@@ -39,6 +39,9 @@
             bottom: 100px;
             text-align: center;
             width: 100%;
+            font-weight: bold;
+            color: #FF4081;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
         }
 
         .canvas {
@@ -47,27 +50,41 @@
         }
 
         img#logo {
-            width: 128px;
+            width: 150px;
             background-size: cover;
-            border-radius: 200px;
-            box-shadow: 0px 0px 40px rgba(63, 81, 181, 0.72);
-            border: 3px solid #00a0ff;
+            border-radius: 50%;
+            box-shadow: 0px 0px 20px rgba(255, 105, 180, 0.8);
+            border: 4px solid #FF69B4;
             opacity: 1;
             margin: 0 auto;
             margin-top: 20px;
             margin-bottom: 20px;
-            transition: all 1.0s;
+            transition: all 0.8s ease;
         }
 
         #logo:hover {
-            box-shadow: 0 0 10px #fff;
-            -webkit-box-shadow: 0 0 19px #fff;
-            transform: rotate(360deg);
-            -ms-transform: rotate(360deg);
-            -moz-transform: rotate(360deg);
-            -webkit-transform: rotate(360deg);
-            -o-transform: rotate(360deg);
-            filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+            box-shadow: 0 0 15px #FFD1DC;
+            -webkit-box-shadow: 0 0 15px #FFD1DC;
+            transform: rotate(360deg) scale(1.1);
+            -ms-transform: rotate(360deg) scale(1.1);
+            -moz-transform: rotate(360deg) scale(1.1);
+            -webkit-transform: rotate(360deg) scale(1.1);
+            -o-transform: rotate(360deg) scale(1.1);
+            animation: sparkle 2s infinite;
+        }
+
+        @keyframes sparkle {
+            0% {
+                box-shadow: 0 0 10px rgba(255, 105, 180, 0.5);
+            }
+
+            50% {
+                box-shadow: 0 0 20px rgba(255, 182, 193, 0.8);
+            }
+
+            100% {
+                box-shadow: 0 0 10px rgba(255, 105, 180, 0.5);
+            }
         }
 
         .cs {
@@ -78,39 +95,39 @@
             text-align: center;
         }
 
-        .text {
-            position: fixed;
-            bottom: 20px;
-            text-align: center;
-            width: 100%;
-            font-weight: bold;
-        }
-
         .text-right {
             position: fixed;
             bottom: 50px;
             text-align: right;
             width: 100%;
             font-weight: bold;
+            color: #FF4081;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
         }
     </style>
 </head>
 
 <body>
     <div class="cs">
-        <img src="./images/embe1.jpg" id="logo">
+        <img src="./images/embe2.jpg" id="logo">
     </div>
     <canvas class="canvas" width="1820" height="905"></canvas>
+    <div>
+        <audio autoplay>
+            <source src="https://dongnv.blob.core.windows.net/bestnetify/1756134588491-happy-birthday-357371.mp3"
+                type="audio/mpeg">
+        </audio>
+    </div>
     <script language="javascript">
         function show_date_time() {
             window.setTimeout("show_date_time()", 1000);
             BirthDay = new Date("20/08/2022 08:30:00");
             today = new Date();
             timeold = (today.getTime() - BirthDay.getTime());
-            sectimeold = timeold / 1000
+            sectimeold = timeold / 1000;
             secondsold = Math.floor(sectimeold);
-            msPerDay = 24 * 60 * 60 * 1000
-            e_daysold = timeold / msPerDay
+            msPerDay = 24 * 60 * 60 * 1000;
+            e_daysold = timeold / msPerDay;
             daysold = Math.floor(e_daysold);
             e_hrsold = (e_daysold - daysold) * 24;
             hrsold = Math.floor(e_hrsold);
@@ -229,6 +246,9 @@
                                 if (index === 0) {
                                     if (sequence.length === 0) {
                                         S.Shape.switchShape(S.ShapeBuilder.letter(''));
+                                        setTimeout(function () {
+                                            window.location.href = 'image-fly.html';
+                                        }, 1000);
                                     } else {
                                         performAction(sequence);
                                     }
@@ -578,12 +598,6 @@
         }());
         S.init();
     </script>
-    <div>
-        <audio autoplay>
-            <source src="https://dongnv.blob.core.windows.net/bestnetify/1756134588491-happy-birthday-357371.mp3"
-                type="audio/mpeg">
-        </audio>
-    </div>
 </body>
 
 </html>
