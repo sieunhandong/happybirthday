@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -7,22 +8,115 @@
         type="image/x-icon" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Patrick+Hand:wght@400;600&family=Dancing+Script:wght@400;700&display=swap"
+        rel="stylesheet">
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         html {
             height: 100%;
         }
 
         body {
-            font-family: "Patrick Hand", "Helvetica Neue", "Luxi Sans", "DejaVu Sans", Tahoma, "Hiragino Sans GB", "Microsoft Yahei", sans-serif;
-            background: linear-gradient(to bottom, #FFB6C1 0%, #FF69B4 120%);
-            color: #FF4081;
-            font-size: 20px;
-            line-height: 2;
-            letter-spacing: 1.5px;
+            font-family: "Patrick Hand", sans-serif;
+            background: linear-gradient(135deg, #FF6B9D 0%, #C44569 25%, #F8B500 50%, #FF6B9D 75%, #C44569 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 8s ease infinite;
             margin: 0;
-            position: relative;
             overflow: hidden;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* Floating hearts animation */
+        .hearts {
+            position: fixed;
+            top: -100px;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 20px;
+            color: rgba(255, 182, 193, 0.8);
+            animation: float 6s infinite linear;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 1;
+            }
+
+            90% {
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Sparkle effects */
+        .sparkles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .sparkle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #FFD700;
+            border-radius: 50%;
+            animation: sparkle 3s infinite;
+        }
+
+        @keyframes sparkle {
+
+            0%,
+            100% {
+                opacity: 0;
+                transform: scale(0);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1);
+            }
         }
 
         .login-container {
@@ -30,28 +124,35 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 700px;
-            height: 500px;
-            background: rgba(255, 245, 247, 0.9);
-            border-radius: 20px;
-            box-shadow: 0 0 20px rgba(255, 105, 180, 0.5);
-            border: 2px solid #FFB6C1;
+            width: min(90vw, 1000px);
+            height: min(80vh, 700px);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 25px;
+            box-shadow:
+                0 25px 50px rgba(255, 105, 180, 0.3),
+                0 0 0 1px rgba(255, 255, 255, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
             display: flex;
             z-index: 1000;
-            animation: sparkle 2s infinite;
+            animation: containerPulse 3s ease-in-out infinite;
+            overflow: hidden;
         }
 
-        @keyframes sparkle {
-            0% {
-                box-shadow: 0 0 10px rgba(255, 105, 180, 0.5);
+        @keyframes containerPulse {
+
+            0%,
+            100% {
+                box-shadow:
+                    0 25px 50px rgba(255, 105, 180, 0.3),
+                    0 0 0 1px rgba(255, 255, 255, 0.2);
             }
 
             50% {
-                box-shadow: 0 0 20px rgba(255, 182, 193, 0.8);
-            }
-
-            100% {
-                box-shadow: 0 0 10px rgba(255, 105, 180, 0.5);
+                box-shadow:
+                    0 25px 60px rgba(255, 105, 180, 0.5),
+                    0 0 0 1px rgba(255, 255, 255, 0.3),
+                    0 0 30px rgba(255, 182, 193, 0.4);
             }
         }
 
@@ -59,7 +160,20 @@
             flex: 1;
             background: url('https://dongnv.blob.core.windows.net/bestnetify/1756134591374-img-embe1.jpg') no-repeat center center;
             background-size: cover;
-            border-radius: 20px 0 0 20px;
+            border-radius: 25px 0 0 25px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .login-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(255, 105, 180, 0.1), rgba(255, 182, 193, 0.1));
+            z-index: 1;
         }
 
         .login-form-container {
@@ -67,99 +181,226 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 20px;
+            padding: 40px;
+            background: linear-gradient(135deg, rgba(255, 240, 245, 0.9), rgba(255, 228, 235, 0.9));
+            border-radius: 0 25px 25px 0;
         }
 
         .login-form {
             text-align: center;
+            width: 100%;
+            max-width: 320px;
         }
 
         .login-form h2 {
-            color: #FF4081;
-            font-size: 24px;
-            margin-bottom: 15px;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+            font-family: "Dancing Script", cursive;
+            font-size: 2.5em;
+            font-weight: 700;
+            color: #C44569;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(196, 69, 105, 0.3);
+            animation: titleBounce 2s ease-in-out infinite;
+        }
+
+        @keyframes titleBounce {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
         }
 
         .login-form input {
             display: block;
-            margin: 10px auto;
-            padding: 10px;
-            width: 200px;
-            border: 2px solid #FFCCDD;
-            border-radius: 10px;
-            font-size: 16px;
+            margin: 15px auto;
+            padding: 15px 20px;
+            width: 100%;
+            border: 2px solid transparent;
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
             font-family: "Patrick Hand", sans-serif;
-            background: #FFF0F5;
-            color: #333;
-            transition: border-color 0.3s ease;
-        }
-
-        .login-form input:disabled {
-            background: #FFE4E1;
-            color: #FF4081;
-            cursor: not-allowed;
+            font-size: 16px;
+            box-shadow: 0 8px 20px rgba(255, 105, 180, 0.1);
+            transition: all 0.3s ease;
         }
 
         .login-form input:focus {
             outline: none;
-            border-color: #FF69B4;
-            box-shadow: 0 0 10px rgba(255, 105, 180, 0.5);
+            border: 2px solid #FF69B4;
+            box-shadow: 0 8px 25px rgba(255, 105, 180, 0.3);
+            transform: translateY(-2px);
         }
 
         .keypad {
             display: grid;
-            grid-template-columns: repeat(3, 50px);
-            gap: 8px;
-            margin: 10px auto;
-            justify-content: center;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin: 20px auto;
+            max-width: 250px;
         }
 
         .keypad button {
-            padding: 8px;
+            padding: 15px;
             border: none;
-            border-radius: 8px;
-            background: #FF69B4;
+            border-radius: 15px;
+            background: linear-gradient(135deg, #FF69B4, #FF1493);
             color: #FFF;
-            font-size: 16px;
             font-family: "Patrick Hand", sans-serif;
+            font-size: 18px;
+            font-weight: 600;
             cursor: pointer;
-            transition: background 0.3s ease, transform 0.2s ease;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 15px rgba(255, 105, 180, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .keypad button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            transition: all 0.6s ease;
+            transform: translate(-50%, -50%);
+        }
+
+        .keypad button:hover::before {
+            width: 100px;
+            height: 100px;
         }
 
         .keypad button:hover {
-            background: #FF1493;
-            transform: scale(1.05);
+            background: linear-gradient(135deg, #FF1493, #C44569);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 10px 25px rgba(255, 105, 180, 0.4);
         }
 
-        .login-form button {
-            padding: 10px 25px;
-            border: none;
-            border-radius: 10px;
-            background: #FF69B4;
-            color: #FFF;
-            font-size: 16px;
-            font-family: "Patrick Hand", sans-serif;
-            cursor: pointer;
-            transition: background 0.3s ease, transform 0.2s ease;
+        .keypad button:active {
+            transform: translateY(-1px) scale(1.02);
         }
 
-        .login-form button:hover {
-            background: #FF1493;
-            transform: scale(1.05);
+        .submit-btn {
+            padding: 15px 40px !important;
+            margin-top: 20px !important;
+            background: linear-gradient(135deg, #F8B500, #FF6B9D) !important;
+            font-size: 18px !important;
+            font-weight: 600 !important;
+            border-radius: 20px !important;
+            box-shadow: 0 8px 20px rgba(248, 181, 0, 0.3) !important;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .submit-btn::after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #FF69B4, #F8B500, #FF69B4);
+            border-radius: 22px;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .submit-btn:hover::after {
+            opacity: 1;
+        }
+
+        .submit-btn:hover {
+            background: linear-gradient(135deg, #FF6B9D, #C44569) !important;
+            transform: translateY(-3px) scale(1.05) !important;
+            box-shadow: 0 12px 30px rgba(248, 181, 0, 0.5) !important;
         }
 
         .error-message {
             color: #FF1744;
-            font-size: 14px;
-            margin-top: 8px;
-            font-family: "Patrick Hand", sans-serif;
+            font-size: 16px;
+            margin-top: 15px;
+            font-weight: 600;
+            text-shadow: 1px 1px 2px rgba(255, 23, 68, 0.3);
+            animation: shake 0.5s ease-in-out;
+        }
+
+        @keyframes shake {
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            25% {
+                transform: translateX(-5px);
+            }
+
+            75% {
+                transform: translateX(5px);
+            }
+        }
+
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            .login-container {
+                flex-direction: column;
+                width: 95vw;
+                height: 90vh;
+            }
+
+            .login-image {
+                flex: 0.4;
+                border-radius: 25px 25px 0 0;
+            }
+
+            .login-form-container {
+                flex: 0.6;
+                border-radius: 0 0 25px 25px;
+                padding: 20px;
+            }
+
+            .login-form h2 {
+                font-size: 2em;
+                margin-bottom: 20px;
+            }
+
+            .keypad {
+                max-width: 200px;
+                gap: 10px;
+            }
+
+            .keypad button {
+                padding: 12px;
+                font-size: 16px;
+            }
+        }
+
+        /* Loading animation for when transitioning */
+        .loading {
+            opacity: 0.7;
+            pointer-events: none;
+            filter: blur(1px);
         }
     </style>
 </head>
 
 <body>
-    <div class="login-container">
+    <!-- Floating hearts -->
+    <div class="hearts" id="hearts"></div>
+
+    <!-- Sparkles -->
+    <div class="sparkles" id="sparkles"></div>
+
+    <div class="login-container" id="loginContainer">
         <div class="login-image"></div>
         <div class="login-form-container">
             <div class="login-form">
@@ -176,31 +417,143 @@
                     <button onclick="appendNumber('7')">7</button>
                     <button onclick="appendNumber('8')">8</button>
                     <button onclick="appendNumber('9')">9</button>
+                    <button onclick="clearPassword()"
+                        style="background: linear-gradient(135deg, #FF6B6B, #EE5A6F);">C</button>
                     <button onclick="appendNumber('0')">0</button>
+                    <button onclick="deleteNumber()"
+                        style="background: linear-gradient(135deg, #4ECDC4, #44A08D);">⌫</button>
                 </div>
-                <button onclick="handleLogin()">Chắc chưa 🎈</button>
+                <button class="submit-btn" onclick="handleLogin()">Chắc chưa 🎈</button>
                 <p id="error-message" class="error-message"></p>
             </div>
         </div>
     </div>
+
     <script>
+        // Create floating hearts
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.innerHTML = '💕';
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.animationDelay = Math.random() * 3 + 's';
+            heart.style.fontSize = (Math.random() * 10 + 15) + 'px';
+            document.getElementById('hearts').appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 6000);
+        }
+
+        // Create sparkles
+        function createSparkle() {
+            const sparkle = document.createElement('div');
+            sparkle.className = 'sparkle';
+            sparkle.style.left = Math.random() * 100 + '%';
+            sparkle.style.top = Math.random() * 100 + '%';
+            sparkle.style.animationDelay = Math.random() * 3 + 's';
+            document.getElementById('sparkles').appendChild(sparkle);
+
+            setTimeout(() => {
+                sparkle.remove();
+            }, 3000);
+        }
+
+        // Generate hearts and sparkles continuously
+        setInterval(createHeart, 800);
+        setInterval(createSparkle, 600);
+
+        // Enhanced functions
         function appendNumber(number) {
-            const passwordInput = document.getElementById('password');
-            passwordInput.value += number;
+            const passwordField = document.getElementById('password');
+            passwordField.value += number;
+
+            // Add a little bounce effect to the input
+            passwordField.style.transform = 'scale(1.05)';
+            setTimeout(() => {
+                passwordField.style.transform = 'scale(1)';
+            }, 100);
+        }
+
+        function clearPassword() {
+            document.getElementById('password').value = '';
+        }
+
+        function deleteNumber() {
+            const passwordField = document.getElementById('password');
+            passwordField.value = passwordField.value.slice(0, -1);
         }
 
         function handleLogin() {
+            const container = document.getElementById('loginContainer');
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
             const errorMessage = document.getElementById('error-message');
 
-            if (username === "Chúc mừng sinh nhật em bé" && password === "25082003") {
-                window.location.href = 'home.html';
-            } else {
-                errorMessage.textContent = "Sai rùi! Bé thử lại đi 🎈";
-                document.getElementById('password').value = '';
-            }
+            // Add loading effect
+            container.classList.add('loading');
+
+            setTimeout(() => {
+                if (username === "Chúc mừng sinh nhật em bé" && password === "25082003") {
+                    // Success animation
+                    container.style.transform = 'translate(-50%, -50%) scale(1.1)';
+                    container.style.opacity = '0';
+                    setTimeout(() => {
+                        window.location.href = 'home.html';
+                    }, 500);
+                } else {
+                    container.classList.remove('loading');
+                    errorMessage.textContent = "Sai rùi! Bé thử lại đi 🎈";
+                    document.getElementById('password').value = '';
+
+                    // Shake animation for error
+                    container.style.animation = 'none';
+                    setTimeout(() => {
+                        container.style.animation = 'containerPulse 3s ease-in-out infinite';
+                    }, 10);
+                }
+            }, 800);
         }
+
+        // Add keyboard support
+        document.addEventListener('keydown', function (event) {
+            if (event.key >= '0' && event.key <= '9') {
+                appendNumber(event.key);
+            } else if (event.key === 'Enter') {
+                handleLogin();
+            } else if (event.key === 'Backspace') {
+                event.preventDefault();
+                deleteNumber();
+            } else if (event.key === 'Delete' || event.key === 'Escape') {
+                clearPassword();
+            }
+        });
+
+        // ✅ preload ảnh và lưu vào bộ nhớ tạm
+        const preloadImages = [
+            './images/embe2.jpg', './images/embe3.jpg', './images/embe4.jpg',
+            './images/embe5.jpg', './images/embe6.jpg', './images/embe7.jpg',
+            './images/embe8.jpg', './images/embe9.jpg', './images/embe10.jpg',
+            './images/embe11.jpg', './images/embe12.jpg', './images/embe13.jpg',
+            './images/embe14.jpg', './images/embe15.jpg', './images/embe16.jpg',
+            './images/embe17.jpg', './images/embe18.jpg', './images/embe19.jpg',
+            './images/embe20.jpg', './images/mbe21.jpg', './images/embe22.jpg',
+            './images/embe23.jpg', './images/embe24.jpg', './images/embe25.jpg',
+            './images/embe26.jpg', './images/embe27.jpg', './images/embe28.jpg',
+            './images/embe29.jpg', './images/embe30.jpg', './images/embe31.jpg',
+            './images/embe32.jpg', './images/embe33.jpg', './images/embe34.jpg',
+            './images/embe35.jpg', './images/embe36.jpg', './images/embe37.jpg',
+            './images/embe38.jpg'
+        ];
+
+        // Preload để cache
+        preloadImages.forEach(src => {
+            const img = new Image();
+            img.src = src;
+        });
+
+        // Lưu vào bộ nhớ tạm thay vì localStorage
+        window.preloadedImages = preloadImages;
     </script>
 </body>
 

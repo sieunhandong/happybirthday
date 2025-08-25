@@ -1,111 +1,60 @@
+<!DOCTYPE html>
 <html>
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
     <title>Happy Birthday Celebration</title>
-    <link rel="Shortcut Icon" href="https://i.pinimg.com/236x/a5/20/de/a520deb545fea9b62776e6bea5d77928.jpg"
-        type="image/x-icon" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
     <style>
-        html {
-            height: 100%;
-        }
-
         body {
-            font-family: "Patrick Hand", "Helvetica Neue", "Luxi Sans", "DejaVu Sans", Tahoma, "Hiragino Sans GB", "Microsoft Yahei", sans-serif;
-            background: linear-gradient(to bottom, #FFB6C1 0%, #FF69B4 120%);
-            color: #FF4081;
-            font-size: 20px;
-            line-height: 2;
-            letter-spacing: 1.5px;
             margin: 0;
-            position: relative;
             overflow: hidden;
-        }
-
-        .canvas {
-            margin: 0 auto;
-            display: block;
+            background: #FFB6C1;
         }
 
         .text {
             position: fixed;
-            bottom: 100px;
-            text-align: center;
+            bottom: 50px;
             width: 100%;
+            text-align: center;
+            font-size: 24px;
             font-weight: bold;
             color: #FF4081;
-            font-size: 24px;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
         }
     </style>
 </head>
 
 <body>
-    <canvas class="canvas" width="1820" height="905"></canvas>
-    <div class="text">🎉 Happy Birthday Celebration! 🎂</div>
-    <div>
-        <audio autoplay loop>
-            <source src="https://dongnv.blob.core.windows.net/bestnetify/1756134588491-happy-birthday-357371.mp3"
-                type="audio/mpeg">
-        </audio>
-    </div>
+    <canvas id="canvas"></canvas>
+    <div class="text">🎉 Happy Birthday Bé iuuuu! 🎂</div>
+    <audio autoplay loop>
+        <source src="https://dongnv.blob.core.windows.net/bestnetify/1756134588491-happy-birthday-357371.mp3"
+            type="audio/mpeg">
+    </audio>
+
     <script>
-        const canvas = document.querySelector('.canvas');
-        const ctx = canvas.getContext('2d');
-
-        function adjustCanvas() {
-            canvas.width = window.innerWidth - 100;
-            canvas.height = window.innerHeight - 30;
+        const canvas = document.getElementById("canvas");
+        const ctx = canvas.getContext("2d");
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
         }
-        adjustCanvas();
-        window.addEventListener('resize', adjustCanvas);
+        resizeCanvas();
+        window.addEventListener("resize", resizeCanvas);
 
-        const images = [
-            '/images/embe1.jpg',
-            '/images/embe2.jpg',
-            '/images/embe3.jpg',
-            '/images/embe4.jpg',
-            '/images/embe5.jpg',
-            '/images/embe6.jpg',
-            '/images/embe7.jpg',
-            '/images/embe8.jpg',
-            '/images/embe9.jpg',
-            '/images/embe10.jpg',
-            '/images/embe11.jpg',
-            '/images/embe12.jpg',
-            '/images/embe13.jpg',
-            '/images/embe14.jpg',
-            '/images/embe15.jpg',
-            '/images/embe16.jpg',
-            '/images/embe17.jpg',
-            '/images/embe18.jpg',
-            '/images/embe19.jpg',
-            '/images/embe20.jpg',
-            '/images/embe21.jpg',
-            '/images/embe22.jpg',
-            '/images/embe23.jpg',
-            '/images/embe24.jpg',
-            '/images/embe25.jpg',
-            '/images/embe26.jpg',
-            '/images/embe27.jpg',
-            '/images/embe28.jpg',
-            '/images/embe29.jpg',
-            '/images/embe30.jpg',
-        ];
-
+        // lấy ảnh từ localStorage (đã preload ở index)
+        const images = JSON.parse(localStorage.getItem("preloadImages")) || [];
         const imageObjects = [];
+        const IMAGE_SIZE = 200;
+
         images.forEach(src => {
             const img = new Image();
-            img.src = src;
+            img.src = src; // đã cache nên hiển thị ngay
             imageObjects.push({
                 img: img,
-                x: -100,
-                y: Math.random() * (canvas.height - 100),
-                speed: Math.random() * 5 + 2,
-                rotation: (Math.random() - 0.5) * 0.2
+                x: Math.random() * canvas.width,
+                y: Math.random() * (canvas.height - IMAGE_SIZE),
+                speed: Math.random() * 3 + 2
             });
         });
 
@@ -113,30 +62,20 @@
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             imageObjects.forEach(obj => {
                 if (obj.img.complete) {
-                    ctx.save();
-                    ctx.translate(obj.x + 50, obj.y + 50);
-                    ctx.rotate(obj.rotation);
-                    ctx.drawImage(obj.img, -50, -50, 100, 100);
-                    ctx.restore();
+                    ctx.drawImage(obj.img, obj.x, obj.y, IMAGE_SIZE, IMAGE_SIZE);
+                    ctx.strokeStyle = "#FF4081";
+                    ctx.lineWidth = 3;
+                    ctx.strokeRect(obj.x, obj.y, IMAGE_SIZE, IMAGE_SIZE);
                     obj.x += obj.speed;
-                    if (obj.x > canvas.width + 100) {
-                        obj.x = -100;
-                        obj.y = Math.random() * (canvas.height - 100);
-                        obj.speed = Math.random() * 5 + 2;
-                        obj.rotation = (Math.random() - 0.5) * 0.2;
+                    if (obj.x > canvas.width) {
+                        obj.x = -IMAGE_SIZE;
+                        obj.y = Math.random() * (canvas.height - IMAGE_SIZE);
                     }
                 }
             });
             requestAnimationFrame(animate);
         }
-
-        // Start animation after all images are loaded
-        Promise.all(imageObjects.map(obj => new Promise(resolve => {
-            if (obj.img.complete) resolve();
-            else obj.img.onload = resolve;
-        }))).then(() => {
-            animate();
-        });
+        animate();
     </script>
 </body>
 
