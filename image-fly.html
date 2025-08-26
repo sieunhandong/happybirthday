@@ -9,6 +9,7 @@
             margin: 0;
             overflow: hidden;
             background: #FFB6C1;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         .text {
@@ -16,10 +17,81 @@
             bottom: 50px;
             width: 100%;
             text-align: center;
-            font-size: 24px;
+            font-size: 26px;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
+            letter-spacing: 1px;
+        }
+
+        /* popup overlay */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+            backdrop-filter: blur(4px);
+        }
+
+        .popup {
+            background: linear-gradient(145deg, #fff, #ffe6f0);
+            padding: 30px 25px;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 420px;
+            position: relative;
+            animation: zoomFade 0.4s ease;
+            box-shadow: 0 8px 25px rgba(255, 64, 129, 0.5);
+        }
+
+        .popup img {
+            width: 220px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+            border: 3px solid #FF4081;
+        }
+
+        .popup p {
+            font-size: 20px;
             font-weight: bold;
             color: #FF4081;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+            line-height: 1.6;
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.6);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 8px;
+            right: 12px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #555;
+            transition: 0.2s;
+        }
+
+        .close-btn:hover {
+            color: #FF4081;
+            transform: scale(1.2);
+        }
+
+        /* animation */
+        @keyframes zoomFade {
+            from {
+                transform: scale(0.5);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
         }
     </style>
 </head>
@@ -31,9 +103,19 @@
         <source src="https://dongnv.blob.core.windows.net/bestnetify/1756203785626-2.mp3" type="audio/mpeg">
     </audio>
 
+    <!-- popup overlay -->
+    <div class="overlay" id="overlay">
+        <div class="popup">
+            <span class="close-btn" id="closeBtn">&times;</span>
+            <img id="popupImg" src="" alt="popup image">
+            <p id="popupMsg"></p>
+        </div>
+    </div>
+
     <script>
         const canvas = document.getElementById("canvas");
         const ctx = canvas.getContext("2d");
+
         function resizeCanvas() {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
@@ -41,19 +123,60 @@
         resizeCanvas();
         window.addEventListener("resize", resizeCanvas);
 
-        // lấy ảnh từ localStorage (đã preload ở index)
+        // lấy ảnh từ localStorage
         const images = JSON.parse(localStorage.getItem("preloadImages")) || [];
         const imageObjects = [];
         const IMAGE_SIZE = 200;
 
-        images.forEach(src => {
+        // các lời chúc tương ứng từng ảnh
+        const messages = [
+            "Chúc em luôn xinh đẹp và hạnh phúc 💖",
+            "Mong em có một năm đầy niềm vui 🎉",
+            "Chúc em gặp nhiều may mắn và thành công 🌟",
+            "Mãi luôn đáng yêu và rạng rỡ như hôm nay 💕",
+            "Một tuổi mới, ngàn điều tuyệt vời mới 🎂✨",
+            "Luôn được yêu thương và che chở như một nàng công chúa 👑",
+            "Chúc em cười thật nhiều mỗi ngày 😍",
+            "Thêm tuổi mới, thêm nhiều trải nghiệm tuyệt vời ✨",
+            "Chúc em có sức khỏe dồi dào và năng lượng tích cực 💪",
+            "Hay ăn chóng lớn 🎁",
+            "Chúc em bay cao bay xa với những ước mơ của mình 🕊️",
+            "Tình yêu và niềm vui sẽ luôn đồng hành cùng em ❤️",
+            "Cuộc sống của em luôn rực rỡ như pháo hoa 🎆",
+            "Chúc em một tuổi mới thật ý nghĩa và nhiều kỷ niệm đẹp 🏖️",
+            "Mong mọi điều tốt đẹp đều đến với em 🌈",
+            "Em mãi là em bé cảu anh ☀️",
+            "Chúc em luôn giữ được nụ cười tỏa nắng 😘",
+            "Một hành trình mới, những điều tốt đẹp mới đang chờ em 🚀",
+            "Chúc em luôn có người ở bên thương yêu và đồng hành 💞",
+            "Hãy sống thật vui và yêu bản thân thật nhiều nhé 🌸",
+            "Chúc em sẽ nhận được thật nhiều bất ngờ ngọt ngào 🎁",
+            "Mỗi ngày của em đều tràn đầy hạnh phúc và tiếng cười 😍",
+            "Tuổi mới sẽ mang đến cho em những giấc mơ thành hiện thực 🌠",
+            "Chúc em luôn tự tin và tỏa sáng ở mọi nơi ✨",
+            "Chúc em luôn khỏe mạnh, mọi bệnh tật đều tan biến 💓",
+            "Chúc em thành công trong mọi công việc 🍀",
+            "Em xứng đáng với tất cả những điều tốt đẹp nhất 💎",
+            "Chúc em thêm tuổi mới thêm nhiều tình yêu và niềm tin 💕",
+            "Mỗi bước đi của em đều ngập tràn ánh sáng 🌟",
+            "Tuổi mới, hãy cứ rực rỡ và lạc quan nhé 🌻",
+            "Mong mọi ước mơ của em sẽ thành hiện thực 🌙",
+            "Chúc em sẽ nhận được thật nhiều hoa, quà và cả yêu thương 🌹",
+            "Mọi ngày đều vui vẻ em nhé 📖",
+            "Em chính là lý do để thế giới này đẹp hơn 💖",
+            "Sinh nhật vui vẻ! Hãy tỏa sáng theo cách của riêng em 🌞"
+        ];
+
+
+        images.forEach((src, i) => {
             const img = new Image();
-            img.src = src; // đã cache nên hiển thị ngay
+            img.src = src;
             imageObjects.push({
                 img: img,
                 x: Math.random() * canvas.width,
                 y: Math.random() * (canvas.height - IMAGE_SIZE),
-                speed: Math.random() * 3 + 2
+                speed: Math.random() * 3 + 2,
+                message: messages[i % messages.length] // gán lời chúc
             });
         });
 
@@ -75,6 +198,37 @@
             requestAnimationFrame(animate);
         }
         animate();
+
+        // popup hiển thị khi click ảnh
+        const overlay = document.getElementById("overlay");
+        const popupImg = document.getElementById("popupImg");
+        const popupMsg = document.getElementById("popupMsg");
+        const closeBtn = document.getElementById("closeBtn");
+
+        canvas.addEventListener("click", function (e) {
+            const mouseX = e.clientX;
+            const mouseY = e.clientY;
+            imageObjects.forEach(obj => {
+                if (
+                    mouseX >= obj.x &&
+                    mouseX <= obj.x + IMAGE_SIZE &&
+                    mouseY >= obj.y &&
+                    mouseY <= obj.y + IMAGE_SIZE
+                ) {
+                    popupImg.src = obj.img.src;
+                    popupMsg.textContent = obj.message;
+                    overlay.style.display = "flex";
+                }
+            });
+        });
+
+        closeBtn.addEventListener("click", () => {
+            overlay.style.display = "none";
+        });
+
+        overlay.addEventListener("click", (e) => {
+            if (e.target === overlay) overlay.style.display = "none";
+        });
     </script>
 </body>
 
