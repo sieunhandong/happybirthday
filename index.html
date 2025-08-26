@@ -552,8 +552,8 @@
             img.src = src;
         });
 
-        // Lưu vào bộ nhớ tạm thay vì localStorage
-        window.preloadedImages = preloadImages;
+        // Lưu vào localStorage để trang khác có thể lấy
+        localStorage.setItem("preloadImages", JSON.stringify(preloadImages));
     </script>
 </body>
 
