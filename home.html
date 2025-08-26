@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html>
 
 <head>
@@ -8,300 +7,83 @@
         type="image/x-icon" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Patrick+Hand:wght@400;600&family=Dancing+Script:wght@400;700&family=Pacifico&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         html {
             height: 100%;
-            overflow-x: hidden;
         }
 
         body {
             font-family: "Patrick Hand", "Helvetica Neue", "Luxi Sans", "DejaVu Sans", Tahoma, "Hiragino Sans GB", "Microsoft Yahei", sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #4facfe 100%);
-            background-size: 400% 400%;
-            animation: gradientFlow 15s ease infinite;
-            color: #ffffff;
-            font-size: 22px;
+            background: linear-gradient(to bottom, #FFB6C1 0%, #FF69B4 120%);
+            color: #FF4081;
+            font-size: 20px;
             line-height: 2;
-            letter-spacing: 2px;
+            letter-spacing: 1.5px;
             margin: 0;
             position: relative;
             overflow: hidden;
-            min-height: 100vh;
-        }
-
-        @keyframes gradientFlow {
-            0% {
-                background-position: 0% 50%;
-            }
-
-            25% {
-                background-position: 100% 0%;
-            }
-
-            50% {
-                background-position: 100% 100%;
-            }
-
-            75% {
-                background-position: 0% 100%;
-            }
-
-            100% {
-                background-position: 0% 50%;
-            }
-        }
-
-        /* Floating particles */
-        .particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        .particle {
-            position: absolute;
-            background: rgba(255, 255, 255, 0.6);
-            border-radius: 50%;
-            animation: floatUp 8s infinite linear;
-        }
-
-        @keyframes floatUp {
-            0% {
-                transform: translateY(100vh) rotate(0deg);
-                opacity: 0;
-            }
-
-            10% {
-                opacity: 1;
-            }
-
-            90% {
-                opacity: 1;
-            }
-
-            100% {
-                transform: translateY(-100px) rotate(360deg);
-                opacity: 0;
-            }
-        }
-
-        /* Magic sparkles */
-        .magic-sparkles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 2;
-        }
-
-        .sparkle-magic {
-            position: absolute;
-            width: 6px;
-            height: 6px;
-            background: #FFD700;
-            border-radius: 50%;
-            animation: sparkleEffect 4s infinite;
-        }
-
-        @keyframes sparkleEffect {
-
-            0%,
-            100% {
-                opacity: 0;
-                transform: scale(0) rotate(0deg);
-            }
-
-            20% {
-                opacity: 1;
-                transform: scale(1) rotate(90deg);
-            }
-
-            80% {
-                opacity: 1;
-                transform: scale(1.2) rotate(270deg);
-            }
-        }
-
-        /* Confetti */
-        .confetti {
-            position: fixed;
-            top: -10px;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 3;
-        }
-
-        .confetti-piece {
-            position: absolute;
-            width: 8px;
-            height: 8px;
-            background: #FFD700;
-            animation: confettiFall 3s linear infinite;
-        }
-
-        @keyframes confettiFall {
-            0% {
-                transform: translateY(-100vh) rotate(0deg);
-                opacity: 1;
-            }
-
-            100% {
-                transform: translateY(100vh) rotate(720deg);
-                opacity: 0;
-            }
         }
 
         a {
-            color: #FFE4E1;
+            color: #FFAAC1;
             text-decoration: none;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-            transition: all 0.3s ease;
-        }
-
-        a:hover {
-            color: #FFB6C1;
-            text-shadow: 0 0 10px rgba(255, 182, 193, 0.8);
         }
 
         .body--ready {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #4facfe 100%);
-            background-size: 400% 400%;
-            animation: gradientFlow 15s ease infinite;
+            background: linear-gradient(to bottom, #FFB6C1 0%, #FF69B4 120%);
         }
 
         .text {
             position: fixed;
-            bottom: 120px;
+            bottom: 100px;
             text-align: center;
             width: 100%;
             font-weight: bold;
-            color: #ffffff;
-            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
-            z-index: 1000;
-            font-family: "Dancing Script", cursive;
-            font-size: 24px;
-            padding: 20px;
-            backdrop-filter: blur(20px);
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            margin: 0 auto;
-            max-width: 600px;
-            left: 50%;
-            transform: translateX(-50%);
-            animation: textGlow 3s ease-in-out infinite alternate;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        @keyframes textGlow {
-            0% {
-                text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
-                box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
-            }
-
-            100% {
-                text-shadow: 2px 2px 12px rgba(0, 0, 0, 0.7), 0 0 20px rgba(255, 255, 255, 0.5);
-                box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
-            }
+            color: #FF4081;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
         }
 
         .canvas {
             margin: 0 auto;
             display: block;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-            backdrop-filter: blur(5px);
-            background: rgba(255, 255, 255, 0.02);
-        }
-
-        .photo-container {
-            position: relative;
-            text-align: center;
-            padding: 20px;
-            z-index: 100;
         }
 
         img#logo {
-            width: 180px;
-            height: 180px;
-            object-fit: cover;
+            width: 150px;
             background-size: cover;
             border-radius: 50%;
-            box-shadow:
-                0 0 0 6px rgba(255, 255, 255, 0.3),
-                0 0 0 12px rgba(255, 105, 180, 0.2),
-                0 20px 40px rgba(255, 105, 180, 0.4);
-            border: 4px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0px 0px 20px rgba(255, 105, 180, 0.8);
+            border: 4px solid #FF69B4;
             opacity: 1;
-            margin: 20px auto;
-            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            z-index: 10;
-        }
-
-        #logo::before {
-            content: '';
-            position: absolute;
-            top: -10px;
-            left: -10px;
-            right: -10px;
-            bottom: -10px;
-            background: linear-gradient(45deg, #FF6B9D, #C44569, #F8B500, #4ECDC4);
-            border-radius: 50%;
-            z-index: -1;
-            animation: rotateGradient 4s linear infinite;
-            opacity: 0;
-            transition: opacity 0.6s ease;
-        }
-
-        @keyframes rotateGradient {
-            0% {
-                transform: rotate(0deg);
-            }
-
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-
-        #logo:hover::before {
-            opacity: 1;
+            margin: 0 auto;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            transition: all 0.8s ease;
         }
 
         #logo:hover {
-            box-shadow:
-                0 0 0 8px rgba(255, 255, 255, 0.4),
-                0 0 0 16px rgba(255, 105, 180, 0.3),
-                0 30px 60px rgba(255, 105, 180, 0.6);
-            transform: rotate(360deg) scale(1.15);
-            animation: heartbeat 1.5s ease-in-out infinite;
+            box-shadow: 0 0 15px #FFD1DC;
+            -webkit-box-shadow: 0 0 15px #FFD1DC;
+            transform: rotate(360deg) scale(1.1);
+            -ms-transform: rotate(360deg) scale(1.1);
+            -moz-transform: rotate(360deg) scale(1.1);
+            -webkit-transform: rotate(360deg) scale(1.1);
+            -o-transform: rotate(360deg) scale(1.1);
+            animation: sparkle 2s infinite;
         }
 
-        @keyframes heartbeat {
-
-            0%,
-            100% {
-                transform: rotate(360deg) scale(1.15);
+        @keyframes sparkle {
+            0% {
+                box-shadow: 0 0 10px rgba(255, 105, 180, 0.5);
             }
 
             50% {
-                transform: rotate(360deg) scale(1.25);
+                box-shadow: 0 0 20px rgba(255, 182, 193, 0.8);
+            }
+
+            100% {
+                box-shadow: 0 0 10px rgba(255, 105, 180, 0.5);
             }
         }
 
@@ -311,272 +93,57 @@
             margin: 0 auto;
             position: absolute;
             text-align: center;
-            top: 0;
-            left: 0;
-            z-index: 100;
         }
 
         .text-right {
             position: fixed;
             bottom: 50px;
-            text-align: center;
+            text-align: right;
             width: 100%;
             font-weight: bold;
-            color: #ffffff;
-            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
-            z-index: 1000;
-            font-family: "Pacifico", cursive;
-            font-size: 18px;
-            padding: 15px;
-            backdrop-filter: blur(15px);
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            margin: 0 20px;
-            animation: pulse 2s ease-in-out infinite;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        @keyframes pulse {
-
-            0%,
-            100% {
-                transform: scale(1);
-                box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
-            }
-
-            50% {
-                transform: scale(1.02);
-                box-shadow: 0 0 30px rgba(255, 255, 255, 0.4);
-            }
-        }
-
-        /* Enhanced countdown display */
-        #countdown {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
-            backdrop-filter: blur(20px);
-            border-radius: 20px;
-            padding: 20px;
-            margin: 20px auto;
-            max-width: 500px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            font-family: "Dancing Script", cursive;
-            font-size: 20px;
-            color: #ffffff;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
-        }
-
-        /* Loading animation overlay */
-        .loading-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 10000;
-            transition: opacity 1s ease;
-        }
-
-        .loading-overlay.hidden {
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        .loader {
-            width: 60px;
-            height: 60px;
-            border: 4px solid rgba(255, 255, 255, 0.3);
-            border-top: 4px solid #ffffff;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            0% {
-                transform: rotate(0deg);
-            }
-
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-
-        /* Mobile responsiveness */
-        @media (max-width: 768px) {
-            body {
-                font-size: 18px;
-                letter-spacing: 1px;
-            }
-
-            img#logo {
-                width: 150px;
-                height: 150px;
-            }
-
-            .text {
-                bottom: 100px;
-                font-size: 20px;
-                padding: 15px;
-                margin: 0 10px;
-            }
-
-            .text-right {
-                bottom: 30px;
-                font-size: 16px;
-                padding: 10px;
-                margin: 0 10px;
-            }
-
-            .canvas {
-                margin: 10px;
-            }
-
-            #countdown {
-                margin: 15px;
-                padding: 15px;
-                font-size: 18px;
-            }
-        }
-
-        /* Canvas particle colors override */
-        .canvas-particle {
-            color: rgba(255, 255, 255, 0.9);
+            color: #FF4081;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
         }
     </style>
 </head>
 
 <body>
-    <!-- Loading overlay -->
-    <div class="loading-overlay" id="loadingOverlay">
-        <div class="loader"></div>
-    </div>
-
-    <!-- Floating particles -->
-    <div class="particles" id="particles"></div>
-
-    <!-- Magic sparkles -->
-    <div class="magic-sparkles" id="magicSparkles"></div>
-
-    <!-- Confetti -->
-    <div class="confetti" id="confetti"></div>
-
-    <div class="cs photo-container">
+    <div class="cs">
         <img src="./images/embe2.jpg" id="logo">
     </div>
-
     <canvas class="canvas" width="1820" height="905"></canvas>
-
-    <div class="text">
-        Chúc mừng sinh nhật người con gái đẹp nhất!<br>
-        Mong bé luôn vui vẻ, hạnh phúc và thành công trong mọi điều!
-    </div>
     <div>
-        <audio autoplay loop>
+        <audio autoplay>
             <source src="https://dongnv.blob.core.windows.net/bestnetify/1756134588491-happy-birthday-357371.mp3"
                 type="audio/mpeg">
         </audio>
     </div>
-
+    <script language="javascript">
+        function show_date_time() {
+            window.setTimeout("show_date_time()", 1000);
+            BirthDay = new Date("20/08/2022 08:30:00");
+            today = new Date();
+            timeold = (today.getTime() - BirthDay.getTime());
+            sectimeold = timeold / 1000;
+            secondsold = Math.floor(sectimeold);
+            msPerDay = 24 * 60 * 60 * 1000;
+            e_daysold = timeold / msPerDay;
+            daysold = Math.floor(e_daysold);
+            e_hrsold = (e_daysold - daysold) * 24;
+            hrsold = Math.floor(e_hrsold);
+            e_minsold = (e_hrsold - hrsold) * 60;
+            minsold = Math.floor((e_hrsold - hrsold) * 60);
+            seconds = Math.floor((e_minsold - minsold) * 60);
+            span_dt_dt.innerHTML = daysold + " Ngày " + hrsold + " Giờ " + minsold + " Phút " + seconds + " Giây ";
+        }
+        show_date_time();
+    </script>
     <script>
-        // Hide loading overlay after page load
-        window.addEventListener('load', function () {
-            setTimeout(() => {
-                document.getElementById('loadingOverlay').classList.add('hidden');
-            }, 1500);
-        });
-
-        // Create floating particles
-        function createParticle() {
-            const particle = document.createElement('div');
-            particle.className = 'particle';
-            particle.style.left = Math.random() * 100 + '%';
-            particle.style.width = (Math.random() * 6 + 2) + 'px';
-            particle.style.height = particle.style.width;
-            particle.style.animationDelay = Math.random() * 8 + 's';
-            particle.style.animationDuration = (Math.random() * 4 + 6) + 's';
-
-            const colors = ['rgba(255, 182, 193, 0.6)', 'rgba(255, 105, 180, 0.6)', 'rgba(255, 255, 255, 0.6)', 'rgba(255, 215, 0, 0.6)'];
-            particle.style.background = colors[Math.floor(Math.random() * colors.length)];
-
-            document.getElementById('particles').appendChild(particle);
-
-            setTimeout(() => {
-                particle.remove();
-            }, 8000);
-        }
-
-        // Create magic sparkles
-        function createSparkle() {
-            const sparkle = document.createElement('div');
-            sparkle.className = 'sparkle-magic';
-            sparkle.style.left = Math.random() * 100 + '%';
-            sparkle.style.top = Math.random() * 100 + '%';
-            sparkle.style.animationDelay = Math.random() * 4 + 's';
-
-            const colors = ['#FFD700', '#FF69B4', '#00CED1', '#32CD32', '#FF4500'];
-            sparkle.style.background = colors[Math.floor(Math.random() * colors.length)];
-
-            document.getElementById('magicSparkles').appendChild(sparkle);
-
-            setTimeout(() => {
-                sparkle.remove();
-            }, 4000);
-        }
-
-        // Create confetti
-        function createConfetti() {
-            const confetti = document.createElement('div');
-            confetti.className = 'confetti-piece';
-            confetti.style.left = Math.random() * 100 + '%';
-            confetti.style.animationDelay = Math.random() * 3 + 's';
-            confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
-
-            const colors = ['#FFD700', '#FF69B4', '#00CED1', '#32CD32', '#FF4500', '#9370DB'];
-            confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
-            confetti.style.transform = 'rotate(' + (Math.random() * 360) + 'deg)';
-
-            document.getElementById('confetti').appendChild(confetti);
-
-            setTimeout(() => {
-                confetti.remove();
-            }, 3000);
-        }
-
-        // Generate effects continuously
-        setInterval(createParticle, 300);
-        setInterval(createSparkle, 500);
-        setInterval(createConfetti, 200);
-
-        // Enhanced date time function
-        // function show_date_time() {
-        //     window.setTimeout("show_date_time()", 1000);
-        //     BirthDay = new Date("08/20/2022 08:30:00");
-        //     today = new Date();
-        //     timeold = (today.getTime() - BirthDay.getTime());
-        //     sectimeold = timeold / 1000;
-        //     secondsold = Math.floor(sectimeold);
-        //     msPerDay = 24 * 60 * 60 * 1000;
-        //     e_daysold = timeold / msPerDay;
-        //     daysold = Math.floor(e_daysold);
-        //     e_hrsold = (e_daysold - daysold) * 24;
-        //     hrsold = Math.floor(e_hrsold);
-        //     e_minsold = (e_hrsold - hrsold) * 60;
-        //     minsold = Math.floor((e_hrsold - hrsold) * 60);
-        //     seconds = Math.floor((e_minsold - minsold) * 60);
-
-        //     const timeString = daysold + " Ngày " + hrsold + " Giờ " + minsold + " Phút " + seconds + " Giây";
-        //     document.getElementById('span_dt_dt').innerHTML = timeString;
-        // }
-        // show_date_time();
         var S = {
             init: function () {
                 S.Drawing.init('.canvas');
                 document.body.classList.add('body--ready');
-                S.UI.simulate("Chúc Em Bé|Sinh Nhật|Vui Vẻ|Hạnh Phúc|Happy Birthday|Anh|Yêu|Bé|Nhất|Trên Đời|25:08|❤️|#countdown 3");
+                S.UI.simulate("Chúc Em Bé|Sinh Nhật|Vui Vẻ|Hạnh Phúc|25/08/2003|Happy Birthday|Anh|Yêu|Bé|Nhất|Trên Đời|❤️|#countdown 3");
                 S.Drawing.loop(function () {
                     S.Shape.render();
                 });
@@ -815,7 +382,7 @@
                         }
                     }
                 }
-                var d = this.p.a - this.t.a;
+                d = this.p.a - this.t.a;
                 this.p.a = Math.max(0.1, this.p.a - (d * 0.05));
                 d = this.p.z - this.t.z;
                 this.p.z = Math.max(1, this.p.z - (d * 0.05));
@@ -841,7 +408,7 @@
                 shapeCanvas = document.createElement('canvas'),
                 shapeContext = shapeCanvas.getContext('2d'),
                 fontSize = 500,
-                fontFamily = 'Patrick Hand, Avenir, Helvetica Neue, Helvetica, Arial, sans-serif';
+                fontFamily = 'Avenir, Helvetica Neue, Helvetica, Arial, sans-serif';
             function fit() {
                 shapeCanvas.width = Math.floor(window.innerWidth / gap) * gap;
                 shapeCanvas.height = Math.floor(window.innerHeight / gap) * gap;
@@ -851,7 +418,8 @@
             }
             function processCanvas() {
                 var pixels = shapeContext.getImageData(0, 0, shapeCanvas.width, shapeCanvas.height).data;
-                var dots = [],
+                dots = [],
+                    pixels,
                     x = 0,
                     y = 0,
                     fx = shapeCanvas.width,
@@ -939,7 +507,6 @@
                 }
             };
         }());
-
         S.Shape = (function () {
             var dots = [],
                 width = 0,
@@ -1029,35 +596,7 @@
                 }
             };
         }());
-
-        // Initialize the animation system
         S.init();
-
-        // Preload images and store in memory instead of localStorage
-        const preloadImages = [
-            './images/embe2.jpg', './images/embe3.jpg', './images/embe4.jpg',
-            './images/embe5.jpg', './images/embe6.jpg', './images/embe7.jpg',
-            './images/embe8.jpg', './images/embe9.jpg', './images/embe10.jpg',
-            './images/embe11.jpg', './images/embe12.jpg', './images/embe13.jpg',
-            './images/embe14.jpg', './images/embe15.jpg', './images/embe16.jpg',
-            './images/embe17.jpg', './images/embe18.jpg', './images/embe19.jpg',
-            './images/embe20.jpg', './images/mbe21.jpg', './images/embe22.jpg',
-            './images/embe23.jpg', './images/embe24.jpg', './images/embe25.jpg',
-            './images/embe26.jpg', './images/embe27.jpg', './images/embe28.jpg',
-            './images/embe29.jpg', './images/embe30.jpg', './images/embe31.jpg',
-            './images/embe32.jpg', './images/embe33.jpg', './images/embe34.jpg',
-            './images/embe35.jpg', './images/embe36.jpg', './images/embe37.jpg',
-            './images/embe38.jpg'
-        ];
-
-        // Preload để cache
-        preloadImages.forEach(src => {
-            const img = new Image();
-            img.src = src;
-        });
-
-        // Store in memory instead of localStorage
-        window.preloadedImages = preloadImages;
     </script>
 </body>
 
