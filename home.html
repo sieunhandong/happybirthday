@@ -1034,30 +1034,30 @@
         S.init();
 
         // Preload images and store in memory instead of localStorage
-        // const preloadImages = [
-        //     './images/embe2.jpg', './images/embe3.jpg', './images/embe4.jpg',
-        //     './images/embe5.jpg', './images/embe6.jpg', './images/embe7.jpg',
-        //     './images/embe8.jpg', './images/embe9.jpg', './images/embe10.jpg',
-        //     './images/embe11.jpg', './images/embe12.jpg', './images/embe13.jpg',
-        //     './images/embe14.jpg', './images/embe15.jpg', './images/embe16.jpg',
-        //     './images/embe17.jpg', './images/embe18.jpg', './images/embe19.jpg',
-        //     './images/embe20.jpg', './images/mbe21.jpg', './images/embe22.jpg',
-        //     './images/embe23.jpg', './images/embe24.jpg', './images/embe25.jpg',
-        //     './images/embe26.jpg', './images/embe27.jpg', './images/embe28.jpg',
-        //     './images/embe29.jpg', './images/embe30.jpg', './images/embe31.jpg',
-        //     './images/embe32.jpg', './images/embe33.jpg', './images/embe34.jpg',
-        //     './images/embe35.jpg', './images/embe36.jpg', './images/embe37.jpg',
-        //     './images/embe38.jpg'
-        // ];
+        const preloadImages = [
+            './images/embe2.jpg', './images/embe3.jpg', './images/embe4.jpg',
+            './images/embe5.jpg', './images/embe6.jpg', './images/embe7.jpg',
+            './images/embe8.jpg', './images/embe9.jpg', './images/embe10.jpg',
+            './images/embe11.jpg', './images/embe12.jpg', './images/embe13.jpg',
+            './images/embe14.jpg', './images/embe15.jpg', './images/embe16.jpg',
+            './images/embe17.jpg', './images/embe18.jpg', './images/embe19.jpg',
+            './images/embe20.jpg', './images/mbe21.jpg', './images/embe22.jpg',
+            './images/embe23.jpg', './images/embe24.jpg', './images/embe25.jpg',
+            './images/embe26.jpg', './images/embe27.jpg', './images/embe28.jpg',
+            './images/embe29.jpg', './images/embe30.jpg', './images/embe31.jpg',
+            './images/embe32.jpg', './images/embe33.jpg', './images/embe34.jpg',
+            './images/embe35.jpg', './images/embe36.jpg', './images/embe37.jpg',
+            './images/embe38.jpg'
+        ];
 
-        // // Preload để cache
-        // preloadImages.forEach(src => {
-        //     const img = new Image();
-        //     img.src = src;
-        // });
+        // Preload để cache
+        preloadImages.forEach(src => {
+            const img = new Image();
+            img.src = src;
+        });
 
-        // // Store in memory instead of localStorage
-        // window.preloadedImages = preloadImages;
+        // Store in memory instead of localStorage
+        window.preloadedImages = preloadImages;
     </script>
 </body>
 
